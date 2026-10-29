@@ -1,0 +1,21 @@
+name: tecnouam
+
+services:
+  postgres:
+    environment:
+      POSTGRES_DB: tecnouam
+      POSTGRES_PASSWORD: tecnouam
+      POSTGRES_USER: tecnouam
+    healthcheck:
+      interval: 5s
+      retries: 10
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U tecnouam -d tecnouam"]
+      timeout: 5s
+    image: postgres:18
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+
+volumes:
+  pgdata:
